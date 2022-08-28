@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+a {
+    color: #58aeed;
+    text-decoration: none;
+}
+
+#side-menu {
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+    height: 100%;
+}
+
+#side-menu ul {
+    padding: 0;
+}
+
+#side-menu a {
+    font-size: 16px;
+    color: #303030;
+}
+
+#side-menu .icon {
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+}
+
+.tweet {
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tweet-img {
+    padding: 0 5px;
+    margin: 0;
+}
+
+.tweet-img img {
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+}
+
+.tweet-body {
+    padding: 5px;
+}
+
+.icon-home {
+    background: url("../svg/home.svg") left no-repeat;
+}
+
+.icon-search {
+    background: url("../svg/search.svg") left no-repeat;
+}
+
+.icon-profile {
+    background: url("../svg/profile.svg") left no-repeat;
+}
+
+
+.tweet-menu .nav-link {
+    margin-right: 60px;
+    padding-left: 0;
+}
+
+.tweet-menu .icon {
+    display: block;
+    color: #8a9aa4;
+    width: 14px;
+    height: 14px;
+}
+
+.icon-bubble {
+    background: url("../svg/bubble.svg") left no-repeat;
+}
+
+.icon-heart {
+    background: url("../svg/heart.svg") left no-repeat;
+}
+
+.icon-loop {
+    background: url("../svg/loop.svg") left no-repeat;
+}
+
+.icon-trash {
+    background: url("../svg/trash.svg") left no-repeat;
+}
+
+#sub-contents .icon {
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+}
+
+a.icon {
+    font-size: 10px;
+    line-height: 0px;
+}
