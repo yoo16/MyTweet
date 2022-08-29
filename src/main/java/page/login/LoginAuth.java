@@ -30,7 +30,7 @@ public class LoginAuth extends HttpServlet {
 			session.setAttribute("auth_user", authUser);
 			session.setAttribute("email", "");
 			session.setAttribute("errors", "");
-			uri = request.getContextPath() + "/user/";
+			uri = request.getContextPath() + "/tweet/";
 		} else {
 			session.setAttribute("email", email);
 			session.setAttribute("errors", "Emailまたはパスワードが間違っています。");

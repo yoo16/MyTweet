@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
@@ -19,9 +18,6 @@ import database.DBSetting;
 @WebServlet(name = "TestInsertTweet", urlPatterns = { "/test_insert_tweet" })
 public class TestInsertTweet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public Connection connection;
-	public PreparedStatement stmt;
-	public ResultSet result;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -33,22 +29,23 @@ public class TestInsertTweet extends HttpServlet {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
+			// user_id をランダムで設定
 			Random rand = new Random();
 			int userId = rand.nextInt(100) - 1;
 
-			String sql = "INSERT INTO tweets SET message = ?, user_id = ?;";
-			System.out.println(sql);
-			connection = DriverManager.getConnection(DBSetting.NAME, DBSetting.USER, DBSetting.PASS);
+			Connection connection = DriverManager.getConnection(DBSetting.NAME, DBSetting.USER, DBSetting.PASS);
 
-			stmt = connection.prepareStatement(sql);
+			// INSERT
+			String sql = "INSERT INTO tweets SET message = ?, user_id = ?;";
+			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, message);
 			stmt.setInt(2, userId);
 			stmt.execute();
+
 			stmt.close();
 			connection.close();
 
-			String uri = request.getContextPath() + "/db_sample.html";
-			response.sendRedirect(uri);
+			response.sendRedirect(request.getContextPath() + "/test_db_index");
 		} catch (SQLException e) {
 			System.out.println(e);
 		} catch (ClassNotFoundException e) {

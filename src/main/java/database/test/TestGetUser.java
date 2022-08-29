@@ -19,9 +19,6 @@ import database.DBSetting;
 @WebServlet(name = "TestGetUser", urlPatterns = { "/test_get_user" })
 public class TestGetUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public Connection connection;
-	public PreparedStatement stmt;
-	public ResultSet result;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -30,20 +27,19 @@ public class TestGetUser extends HttpServlet {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
-			String sql = "SELECT * FROM users";
-			connection = DriverManager.getConnection(DBSetting.NAME, DBSetting.USER, DBSetting.PASS);
-			stmt = connection.prepareStatement(sql);
+			String sql = "SELECT * FROM users WHERE id = 1";
+			Connection connection = DriverManager.getConnection(DBSetting.NAME, DBSetting.USER, DBSetting.PASS);
+			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.execute();
-			result = stmt.executeQuery();
+			ResultSet result = stmt.executeQuery();
+			result.next();
 
-			while (result.next()) {
-				PrintWriter out = response.getWriter();
-				out.println(result.getString("id"));
-				out.println(result.getString("name"));
-				out.println(result.getString("email"));
-				out.println(result.getString("password"));
-				out.println("<br>");
-			}
+			PrintWriter out = response.getWriter();
+			out.println(result.getString("id"));
+			out.println(result.getString("name"));
+			out.println(result.getString("email"));
+			out.println(result.getString("password"));
+
 			result.close();
 			stmt.close();
 			connection.close();

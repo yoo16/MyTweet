@@ -24,6 +24,7 @@ public class LoginIndex extends HttpServlet {
 		
 		request.setAttribute("email", email);
 		request.setAttribute("errors", errors);
+		session.removeAttribute("errors");
 		request.getRequestDispatcher(jsp).forward(request, response); 
 	}
 

@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DBSetting;
 
-@WebServlet(name = "TestGetTweet", urlPatterns = { "/test_get_tweet" })
-public class TestGetTweet extends HttpServlet {
+@WebServlet(name = "TestGetTweets", urlPatterns = { "/test_get_tweets" })
+public class TestGetTweets extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

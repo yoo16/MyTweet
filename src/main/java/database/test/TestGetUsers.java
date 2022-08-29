@@ -1,6 +1,7 @@
 package database.test;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,27 +16,37 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DBSetting;
 
-@WebServlet(name = "TestDeleteTweet", urlPatterns = { "/test_delete_tweet" })
-public class TestDeleteTweet extends HttpServlet {
+@WebServlet(name = "TestGetUsers", urlPatterns = { "/test_get_users" })
+public class TestGetUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public Connection connection;
 	public PreparedStatement stmt;
 	public ResultSet result;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		response.setContentType("text/html; charset=UTF-8");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
-			String sql = "DELETE FROM tweets";
+			String sql = "SELECT * FROM users";
 			connection = DriverManager.getConnection(DBSetting.NAME, DBSetting.USER, DBSetting.PASS);
 			stmt = connection.prepareStatement(sql);
 			stmt.execute();
+			result = stmt.executeQuery();
+
+			while (result.next()) {
+				PrintWriter out = response.getWriter();
+				out.println(result.getString("id"));
+				out.println(result.getString("name"));
+				out.println(result.getString("email"));
+				out.println(result.getString("password"));
+				out.println("<br>");
+			}
+			result.close();
 			stmt.close();
 			connection.close();
-			
-			response.sendRedirect(request.getContextPath() + "/test_db_index");
 		} catch (SQLException e) {
 			System.out.println(e);
 		} catch (ClassNotFoundException e) {
